@@ -1,3 +1,4 @@
+BTW THE BATCH JUST DOES THE FIX AUTOMATICALLY MANUAL GUIDE WILL STILL FIX IT THE SAME
 ### Manual Fix Guide By Marcelo/@pronhubstar for SolaraV3 Not Opening After Bootstrapper WORKING FIX MANUAL GUIDE for the skiddies that dont understand Batch thinking I Rat LMAO
 @everyone 
 ### 1. Close Node.js Processes
