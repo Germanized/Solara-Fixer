@@ -12,13 +12,13 @@ cls
 echo............................................................................                                                                                                                               
 echo   #####                                     #######                     
 echo #     #  ####  #        ##   #####    ##   #       # #    # ###### ##### 
-echo #       #    # #       #  #  #    #  #  #  #       #  #  #  #      #    # 
+echo #       #    # #       #  #  #    #  #  #  #       #  #  #  #      #    #
 echo  #####  #    # #      #    # #    # #    # #####   #   ##   #####  #    #
 echo       # #    # #      ###### #####  ###### #       #   ##   #      ##### 
 echo #     # #    # #      #    # #   #  #    # #       #  #  #  #      #   #     
 echo  #####   ####  ###### #    # #    # #    # #       # #    # ###### #    #  
 echo............................................................................                                                                                                                               
-echo Version [2.0.1] By Germanized/Marcelo If "Downloads" dont work Means u Need to open As Admin
+echo Version [7.8.6] By Germanized/Marcelo If "Downloads" dont work Means u Need to open As Admin
 echo.
 echo 1. Fix Solara Not Opening after Bootstrapper and more
 echo 2. Download Solara Bootstrapper (Already Bypassed)
@@ -97,7 +97,30 @@ endlocal
 echo Emptying Recycle Bin...
 powershell -command "(New-Object -ComObject Shell.Application).NameSpace(0xA).Items() | ForEach-Object { $_.InvokeVerb('delete') }" >> "%errorLog%" 2>&1
 
-echo Deletion process completed and Recycle Bin emptied. If it doesn't work, USE VPN.
+:: Prompt to try opening Solara or using Part Two if it doesn't work
+echo Deletion process completed and Recycle Bin emptied. If Solara doesn't open, try using Part Two.
+echo Open Solara Then Press Enter on This Cmd...
+pause
+echo Did Solara open successfully?
+echo 1. Yes
+echo 2. No, try Part Two.
+set /p solara_success="Enter your choice: "
+if %solara_success%==1 goto menu
+if %solara_success%==2 goto part_two
+goto menu
+
+:part_two
+echo Extracting SolaraV3.dll from Solara.zip...
+
+:: Extract SolaraV3.dll from Solara.zip and move to ProgramData\Solara folder
+powershell -command "Add-Type -AssemblyName System.IO.Compression.FileSystem; \
+[IO.Compression.ZipFile]::ExtractToDirectory('%ProgramData%\Solara.zip', '%ProgramData%\Solara');"
+if exist "%ProgramData%\Solara\SolaraV3.dll" (
+    echo SolaraV3.dll successfully extracted to ProgramData\Solara.
+) else (
+    echo Error: SolaraV3.dll extraction failed.
+    echo Please report this issue to the GitHub: https://github.com/Germanized/Solara-Fixer
+)
 pause
 goto menu
 
